@@ -1,0 +1,112 @@
+/* ==========================================
+   1. IMPORT FONT LOCALI (@font-face)
+   ========================================== */
+/* Modifica le estensioni (.ttf, .woff2, .otf) in base ai file che hai scaricato */
+@font-face {
+  font-family: 'Zilla Slab';
+  src: url('../fonts/ZillaSlab-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Piazzolla';
+  src: url('../fonts/Piazzolla-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ==========================================
+   2. VARIABILI GLOBALI (:root)
+   ========================================== */
+:root {
+  /* Colori (Sostituisci con i codici HEX esatti dal tuo Figma) */
+  --color-bg: #f5efe6;          /* Arkeo White / Sfondo */
+  --color-text: #2b2523;        /* Testo principale */
+  --color-accent: #c84b31;      /* Rosso accento */
+  --color-footer-bg: #1a1817;   /* Sfondo scuro footer */
+
+  /* Tipografia */
+  --font-heading: 'Zilla Slab', serif;
+  --font-body: 'Piazzolla', serif;
+
+  /* Spazature e Navbar */
+  --nav-height: 143px;
+}
+
+/* ==========================================
+   3. RESET E STILI BASE
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Stili Titoli */
+h1, h2, h3, .heading-font {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* ==========================================
+   4. NAVBAR
+   ========================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  background-color: var(--color-bg); /* Copre gli elementi sottostanti */
+  z-index: 1000;                      /* Garantisce che sia sempre in primo piano */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 96px; /* Padding laterale come da layout Figma */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  text-decoration: none;
+  color: var(--color-text);
+  font-style: italic;
+}
+
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  opacity: 0.6;
+}
