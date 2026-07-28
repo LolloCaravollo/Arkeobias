@@ -4,16 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arkeobias — Anatomia del fraintendimento</title>
-  
-  <!-- Collegamento al CSS globale -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <!-- SCHERMATA DI LOADING (Avanza solo allo scroll) -->
+  <div id="loader">
+    <div class="loader-logo-img"></div>
+  </div>
+
   <!-- NAVBAR FISSA -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo">Arkeobias</a>
+      <!-- Logo vettoriale al posto del testo -->
+      <a href="#" id="nav-logo" class="logo-link" title="Torna alla schermata iniziale">
+        <div class="nav-logo-img"></div>
+      </a>
       
       <nav class="nav-links">
         <ul>
@@ -27,8 +33,10 @@
   </header>
 
   <main>
-    <!-- Qui inseriremo la Hero Section e il Concept -->
+    <!-- Contenuto principale della Home Page -->
   </main>
 
+  <!-- Script per l'interazione dello scroll e del click sul logo -->
+  <script src="js/main.js"></script>
 </body>
 </html>

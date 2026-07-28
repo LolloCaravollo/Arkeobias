@@ -1,7 +1,6 @@
 /* ==========================================
    1. IMPORT FONT LOCALI (@font-face)
    ========================================== */
-/* Modifica le estensioni (.ttf, .woff2, .otf) in base ai file che hai scaricato */
 @font-face {
   font-family: 'Zilla Slab';
   src: url('../fonts/ZillaSlab-Bold.ttf') format('truetype');
@@ -17,20 +16,16 @@
 }
 
 /* ==========================================
-   2. VARIABILI GLOBALI (:root)
+   2. VARIABILI GLOBALI (Palette Ufficiale)
    ========================================== */
 :root {
-  /* Colori (Sostituisci con i codici HEX esatti dal tuo Figma) */
-  --color-bg: #f5efe6;          /* Arkeo White / Sfondo */
-  --color-text: #2b2523;        /* Testo principale */
-  --color-accent: #c84b31;      /* Rosso accento */
-  --color-footer-bg: #1a1817;   /* Sfondo scuro footer */
+  --color-bg: #F8F4F1;          /* Arkeo White */
+  --color-brown: #CEB8A7;       /* Arkeo Brown */
+  --color-text: #1B0D02;        /* Arkeo Black */
 
-  /* Tipografia */
   --font-heading: 'Zilla Slab', serif;
   --font-body: 'Piazzolla', serif;
 
-  /* Spazature e Navbar */
   --nav-height: 143px;
 }
 
@@ -52,14 +47,73 @@ body {
   overflow-x: hidden;
 }
 
-/* Stili Titoli */
-h1, h2, h3, .heading-font {
+/* Tipografia: Zilla Slab sempre BOLD */
+h1, h2, h3, .heading-font, .nav-links a {
   font-family: var(--font-heading);
   font-weight: 700;
 }
 
 /* ==========================================
-   4. NAVBAR
+   4. SCHERMATA DI LOADING (ENTRATA + USCITA SINCRONIZZATA)
+   ========================================== */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-bg); /* Arkeo White */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  
+  /* Transizione fluida della tendina: scivola in alto (1s) e sfuma (0.8s) in perfetto sincrono */
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), 
+              opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1),
+              visibility 0.8s ease;
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Stato nascosto allo scroll: l'intero pannello (sfondo + logo) sale armoniosamente */
+#loader.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Logo centrale */
+.loader-logo-img {
+  width: 520px;
+  height: 130px;
+  background-color: var(--color-brown); /* Arkeo Brown */
+  -webkit-mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
+  mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
+  display: block;
+
+  /* Animazione d'ingresso iniziale: il logo si riempie di colore in 1.8s */
+  animation: logoLoadFill 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Keyframes comparsa iniziale (da invisibile ad Arkeo Brown) */
+@keyframes logoLoadFill {
+  0% {
+    background-color: var(--color-bg);
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    background-color: var(--color-brown);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================
+   5. NAVBAR E LINK DI NAVIGAZIONE
    ========================================== */
 .navbar {
   position: fixed;
@@ -67,31 +121,44 @@ h1, h2, h3, .heading-font {
   left: 0;
   width: 100%;
   height: var(--nav-height);
-  background-color: var(--color-bg); /* Copre gli elementi sottostanti */
-  z-index: 1000;                      /* Garantisce che sia sempre in primo piano */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--color-bg);
+  z-index: 1000;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid var(--color-brown); /* Linea sottile Arkeo Brown */
 }
 
 .nav-container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 96px; /* Padding laterale come da layout Figma */
+  padding: 0 96px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logo {
-  font-family: var(--font-heading);
-  font-size: 36px;
+/* Logo Vettoriale nella Navbar */
+.logo-link {
   text-decoration: none;
-  color: var(--color-text);
-  font-style: italic;
+  display: inline-block;
 }
 
+.nav-logo-img {
+  width: 180px;
+  height: 45px;
+  background-color: var(--color-brown);
+  -webkit-mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
+  mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.nav-logo-img:hover {
+  background-color: var(--color-text); /* Hover: Arkeo Black */
+}
+
+/* Link del menu */
 .nav-links ul {
   display: flex;
   list-style: none;
@@ -100,13 +167,17 @@ h1, h2, h3, .heading-font {
 
 .nav-links a {
   text-decoration: none;
-  color: var(--color-text);
+  color: var(--color-brown); /* Default: Arkeo Brown */
   font-family: var(--font-heading);
+  font-weight: 700;
   font-size: 18px;
-  transition: opacity 0.3s ease;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
+/* Hover e Stato Attivo: Arkeo Black + Sottolineatura */
 .nav-links a:hover,
 .nav-links a.active {
-  opacity: 0.6;
+  color: var(--color-text); /* Arkeo Black */
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
