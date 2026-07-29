@@ -31,27 +31,39 @@
   /* Variabili Responsive da Figma (Base Mobile: 390px) */
   --margin: 24px;
   --gutter: 16px;
-  --logo-height: 35px;          /* Logo size Figma: 46 */
+  --logo-height: 35px;          
   --nav-height: 80px;
+
+  /* Tipografia Hero Mobile */
+  --font-display: 32px;
+  --line-height-display: 0.95;
 }
 
 /* TABLET BREAKPOINT (768px) */
 @media (min-width: 768px) {
   :root {
-    --margin: 38px;             /* Margin Figma: 38 */
-    --gutter: 24px;             /* Gutter Figma: 24 */
-    --logo-height: 40px;        /* Logo size Figma: 77 */
+    --margin: 38px;
+    --gutter: 24px;
+    --logo-height: 38px;
     --nav-height: 110px;
+
+    /* Tipografia Hero Tablet */
+    --font-display: 52px;
+    --line-height-display: 0.92;
   }
 }
 
 /* DESKTOP BREAKPOINT (1024px / 1440px) */
 @media (min-width: 1024px) {
   :root {
-    --margin: 96px;             /* Margin Figma: 96 */
-    --gutter: 32px;             /* Gutter Figma: 32 */
-    --logo-height: 50px;       /* Logo size Figma: 125 */
+    --margin: 96px;
+    --gutter: 32px;
+    --logo-height: 45px;
     --nav-height: 143px;
+
+    /* Tipografia Hero Desktop */
+    --font-display: 76px;
+    --line-height-display: 0.9;
   }
 }
 
@@ -286,4 +298,27 @@ h1, h2, h3, .heading-font, .nav-links a {
   .nav-links a {
     font-size: 18px;
   }
+}
+
+/* ==========================================
+   6. HERO SECTION
+   ========================================== */
+.hero-section {
+  width: 100%;
+  min-height: calc(100vh - var(--nav-height)); /* Centra verticalmente nello schermo */
+  margin-top: var(--nav-height);              /* Compensa la navbar fissa */
+  padding: 80px var(--margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title {
+  font-family: var(--font-heading); /* Zilla Slab */
+  font-weight: 700;                 /* Bold */
+  color: var(--color-brown);        /* Arkeo Brown #CEB8A7 */
+  font-size: var(--font-display);   /* Scala in automatico: 26px -> 42px -> 68px */
+  line-height: var(--line-height-display);
 }
