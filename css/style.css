@@ -16,17 +16,43 @@
 }
 
 /* ==========================================
-   2. VARIABILI GLOBALI (Palette Ufficiale)
+   2. VARIABILI GLOBALI — MOBILE FIRST (390px)
    ========================================== */
 :root {
+  /* Palette Ufficiale Arkeobias */
   --color-bg: #F8F4F1;          /* Arkeo White */
   --color-brown: #CEB8A7;       /* Arkeo Brown */
   --color-text: #1B0D02;        /* Arkeo Black */
 
+  /* Tipografia */
   --font-heading: 'Zilla Slab', serif;
   --font-body: 'Piazzolla', serif;
 
-  --nav-height: 143px;
+  /* Variabili Responsive da Figma (Base Mobile: 390px) */
+  --margin: 24px;
+  --gutter: 16px;
+  --logo-height: 35px;          /* Logo size Figma: 46 */
+  --nav-height: 80px;
+}
+
+/* TABLET BREAKPOINT (768px) */
+@media (min-width: 768px) {
+  :root {
+    --margin: 38px;             /* Margin Figma: 38 */
+    --gutter: 24px;             /* Gutter Figma: 24 */
+    --logo-height: 40px;        /* Logo size Figma: 77 */
+    --nav-height: 110px;
+  }
+}
+
+/* DESKTOP BREAKPOINT (1024px / 1440px) */
+@media (min-width: 1024px) {
+  :root {
+    --margin: 96px;             /* Margin Figma: 96 */
+    --gutter: 32px;             /* Gutter Figma: 32 */
+    --logo-height: 50px;       /* Logo size Figma: 125 */
+    --nav-height: 143px;
+  }
 }
 
 /* ==========================================
@@ -47,14 +73,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Tipografia: Zilla Slab sempre BOLD */
 h1, h2, h3, .heading-font, .nav-links a {
   font-family: var(--font-heading);
   font-weight: 700;
 }
 
 /* ==========================================
-   4. SCHERMATA DI LOADING (ENTRATA + USCITA SINCRONIZZATA)
+   4. SCHERMATA DI LOADING (OVERLAY)
    ========================================== */
 #loader {
   position: fixed;
@@ -62,13 +87,12 @@ h1, h2, h3, .heading-font, .nav-links a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--color-bg); /* Arkeo White */
+  background-color: var(--color-bg);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
   
-  /* Transizione fluida della tendina: scivola in alto (1s) e sfuma (0.8s) in perfetto sincrono */
   transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), 
               opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1),
               visibility 0.8s ease;
@@ -77,7 +101,6 @@ h1, h2, h3, .heading-font, .nav-links a {
   visibility: visible;
 }
 
-/* Stato nascosto allo scroll: l'intero pannello (sfondo + logo) sale armoniosamente */
 #loader.hidden {
   transform: translateY(-100%);
   opacity: 0;
@@ -85,20 +108,16 @@ h1, h2, h3, .heading-font, .nav-links a {
   pointer-events: none;
 }
 
-/* Logo centrale */
 .loader-logo-img {
-  width: 520px;
-  height: 130px;
-  background-color: var(--color-brown); /* Arkeo Brown */
+  width: min(80vw, 520px);
+  height: min(20vw, 130px);
+  background-color: var(--color-brown);
   -webkit-mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
   mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
   display: block;
-
-  /* Animazione d'ingresso iniziale: il logo si riempie di colore in 1.8s */
   animation: logoLoadFill 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* Keyframes comparsa iniziale (da invisibile ad Arkeo Brown) */
 @keyframes logoLoadFill {
   0% {
     background-color: var(--color-bg);
@@ -113,7 +132,7 @@ h1, h2, h3, .heading-font, .nav-links a {
 }
 
 /* ==========================================
-   5. NAVBAR E LINK DI NAVIGAZIONE
+   5. NAVBAR E HAMBURGER MENU (MOBILE & TABLET)
    ========================================== */
 .navbar {
   position: fixed;
@@ -125,59 +144,146 @@ h1, h2, h3, .heading-font, .nav-links a {
   z-index: 1000;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--color-brown); /* Linea sottile Arkeo Brown */
+  border-bottom: 1px solid var(--color-brown);
+  transition: height 0.3s ease-in-out;
 }
 
 .nav-container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 96px;
+  padding: 0 var(--margin);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Logo Vettoriale nella Navbar */
+/* Logo Navbar */
 .logo-link {
   text-decoration: none;
   display: inline-block;
 }
 
 .nav-logo-img {
-  width: 180px;
-  height: 45px;
+  width: auto;
+  height: var(--logo-height);
+  min-height: 32px;
+  aspect-ratio: 4 / 1;
   background-color: var(--color-brown);
   -webkit-mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
   mask: url('../img/logo-arkeobias.svg') no-repeat center / contain;
   display: block;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease-in-out, height 0.3s ease-in-out;
 }
 
 .nav-logo-img:hover {
-  background-color: var(--color-text); /* Hover: Arkeo Black */
+  background-color: var(--color-text);
 }
 
-/* Link del menu */
+/* Bottone Hamburger (Mobile & Tablet) */
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.hamburger-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-brown);
+  -webkit-mask: url('../img/icon-hamburger-close.svg') no-repeat center / contain;
+  mask: url('../img/icon-hamburger-close.svg') no-repeat center / contain;
+  display: block;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Varianti Icona Hamburger (Apertura con la X) */
+.hamburger-btn.is-open .hamburger-icon {
+  -webkit-mask-image: url('../img/icon-hamburger-open.svg');
+  mask-image: url('../img/icon-hamburger-open.svg');
+}
+
+/* Menu Tendina Overlay (Mobile First: 0.3s animazione da Figma) */
+.nav-links {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - var(--nav-height));
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: translateY(-10px);
+  z-index: 1000;
+}
+
+.nav-links.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
 .nav-links ul {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
   list-style: none;
-  gap: 40px;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: var(--color-brown); /* Default: Arkeo Brown */
+  color: var(--color-brown);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 18px;
-  transition: color 0.3s ease, text-decoration 0.3s ease;
+  font-size: 24px;
+  transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
 }
 
-/* Hover e Stato Attivo: Arkeo Black + Sottolineatura */
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-text); /* Arkeo Black */
+  color: var(--color-text);
   text-decoration: underline;
   text-underline-offset: 6px;
+}
+
+/* ==========================================
+   6. DESKTOP STYLES (da 1024px in su)
+   ========================================== */
+@media (min-width: 1024px) {
+  .hamburger-btn {
+    display: none;
+  }
+
+  .nav-links {
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: none;
+  }
+
+  .nav-links ul {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .nav-links a {
+    font-size: 18px;
+  }
 }

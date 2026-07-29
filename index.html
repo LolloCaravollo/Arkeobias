@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- SCHERMATA DI LOADING (Avanza solo allo scroll) -->
+  <!-- SCHERMATA DI LOADING -->
   <div id="loader">
     <div class="loader-logo-img"></div>
   </div>
@@ -16,12 +16,18 @@
   <!-- NAVBAR FISSA -->
   <header class="navbar">
     <div class="nav-container">
-      <!-- Logo vettoriale al posto del testo -->
+      <!-- Logo Vettoriale -->
       <a href="#" id="nav-logo" class="logo-link" title="Torna alla schermata iniziale">
         <div class="nav-logo-img"></div>
       </a>
       
-      <nav class="nav-links">
+      <!-- Pulsante Hamburger (Mobile & Tablet) -->
+      <button id="hamburger-btn" class="hamburger-btn" aria-label="Apri menu">
+        <span class="hamburger-icon"></span>
+      </button>
+
+      <!-- Nav Links (Drawer su Mobile/Tablet, Inline su Desktop) -->
+      <nav id="nav-links" class="nav-links">
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="archive.html">Archive</a></li>
@@ -36,7 +42,7 @@
     <!-- Contenuto principale della Home Page -->
   </main>
 
-  <!-- Script per l'interazione dello scroll e del click sul logo -->
+  <!-- Script per scroll, loader e menu -->
   <script src="js/main.js"></script>
 </body>
 </html>

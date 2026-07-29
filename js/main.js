@@ -1,9 +1,11 @@
-// Seleziona gli elementi del DOM
+// Seleziona elementi del DOM
 const loader = document.getElementById('loader');
 const navLogo = document.getElementById('nav-logo');
 const homeLink = document.querySelector('.nav-links a[href="index.html"]');
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const navLinks = document.getElementById('nav-links');
 
-// Funzioni per gestire lo scroll della pagina
+// Gestione Scroll della Pagina
 function disableScroll() {
   document.body.style.overflow = 'hidden';
 }
@@ -12,39 +14,60 @@ function enableScroll() {
   document.body.style.overflow = '';
 }
 
-// 1. CHIUDE IL LOADER (Da Caricamento a Home)
+// 1. GESTIONE SCHERMATA DI LOADING
 function dismissLoader() {
   if (loader && !loader.classList.contains('hidden')) {
     loader.classList.add('hidden');
-    enableScroll(); // Riapre lo scroll della pagina solo ad animazione avviata
+    enableScroll();
   }
 }
 
-// 2. APRI IL LOADER (Da Home a Caricamento)
 function openLoader() {
   if (loader) {
     window.scrollTo({ top: 0, behavior: 'instant' });
     loader.classList.remove('hidden');
-    disableScroll(); // Blocca lo scroll mentre c'è il loader
+    disableScroll();
   }
 }
 
-// All'avvio della pagina blocchiamo lo scroll se il loader è attivo
 if (loader && !loader.classList.contains('hidden')) {
   disableScroll();
 }
 
-// Rileva lo scroll della rotella verso il basso per CHIUDERE il loader
 window.addEventListener('wheel', (e) => {
-  if (e.deltaY > 0) { 
+  if (e.deltaY > 0) {
     dismissLoader();
   }
 }, { passive: true });
 
-// Rileva lo swipe su dispositivi touch
 window.addEventListener('touchmove', dismissLoader, { passive: true });
 
-// 3. CLIC SUL LOGO NAVBAR -> Riapre la tendina di caricamento
+// 2. GESTIONE HAMBURGER MENU (Mobile & Tablet)
+if (hamburgerBtn && navLinks) {
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = navLinks.classList.contains('is-open');
+
+    if (isOpen) {
+      navLinks.classList.remove('is-open');
+      hamburgerBtn.classList.remove('is-open');
+      enableScroll();
+    } else {
+      navLinks.classList.add('is-open');
+      hamburgerBtn.classList.add('is-open');
+      disableScroll();
+    }
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      hamburgerBtn.classList.remove('is-open');
+      enableScroll();
+    });
+  });
+}
+
+// 3. CLIC SUL LOGO NAVBAR -> Riapre Loader
 if (navLogo) {
   navLogo.addEventListener('click', (e) => {
     e.preventDefault();
@@ -52,7 +75,7 @@ if (navLogo) {
   });
 }
 
-// 4. CLIC SU "HOME" -> Scroll fluido in cima senza riaprire il loader
+// 4. CLIC SU "HOME" -> Scroll fluido in cima
 if (homeLink) {
   homeLink.addEventListener('click', (e) => {
     const isHomePage = window.location.pathname.endsWith('index.html') || 
