@@ -50,11 +50,9 @@ if (hamburgerBtn && navLinks) {
     if (isOpen) {
       navLinks.classList.remove('is-open');
       hamburgerBtn.classList.remove('is-open');
-      enableScroll();
     } else {
       navLinks.classList.add('is-open');
       hamburgerBtn.classList.add('is-open');
-      disableScroll();
     }
   });
 
@@ -62,7 +60,6 @@ if (hamburgerBtn && navLinks) {
     link.addEventListener('click', () => {
       navLinks.classList.remove('is-open');
       hamburgerBtn.classList.remove('is-open');
-      enableScroll();
     });
   });
 }

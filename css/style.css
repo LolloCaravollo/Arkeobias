@@ -44,7 +44,7 @@
   :root {
     --margin: 38px;
     --gutter: 24px;
-    --logo-height: 38px;
+    --logo-height: 40px;
     --nav-height: 110px;
 
     /* Tipografia Hero Tablet */
@@ -62,7 +62,7 @@
     --nav-height: 143px;
 
     /* Tipografia Hero Desktop */
-    --font-display: 76px;
+    --font-display: 68px;
     --line-height-display: 0.9;
   }
 }
@@ -151,21 +151,22 @@ h1, h2, h3, .heading-font, .nav-links a {
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--nav-height);
+  min-height: var(--nav-height);
   background-color: var(--color-bg);
   z-index: 1000;
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--color-brown);
-  transition: height 0.3s ease-in-out;
+  transition: min-height 0.3s ease-in-out;
 }
 
 .nav-container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 var(--margin);
+  padding: 16px var(--margin);
   display: flex;
+  flex-wrap: wrap; /* Permette ai link di posizionarsi sotto la barra principale */
   justify-content: space-between;
   align-items: center;
 }
@@ -197,7 +198,7 @@ h1, h2, h3, .heading-font, .nav-links a {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,39 +221,31 @@ h1, h2, h3, .heading-font, .nav-links a {
   mask-image: url('../img/icon-hamburger-open.svg');
 }
 
-/* Menu Tendina Overlay (Mobile First: 0.3s animazione da Figma) */
+/* NAV LINKS (Mobile & Tablet: Tendina che allunga la Navbar) */
 .nav-links {
-  position: fixed;
-  top: var(--nav-height);
-  left: 0;
-  width: 100vw;
-  height: calc(100vh - var(--nav-height));
-  background-color: var(--color-bg);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-height: 0;
   opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
-  transform: translateY(-10px);
-  z-index: 1000;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+  margin-top: 0;
 }
 
+/* Stato Aperto: Espande la Navbar e mostra i testi */
 .nav-links.is-open {
+  max-height: 220px;
   opacity: 1;
-  visibility: visible;
-  pointer-events: all;
-  transform: translateY(0);
+  margin-top: 20px;
+  margin-bottom: 8px;
 }
 
 .nav-links ul {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 36px;
+  align-items: flex-end; /* Allinea i testi a destra sotto la X */
+  gap: 14px;
   list-style: none;
+  text-align: right;
 }
 
 .nav-links a {
@@ -260,7 +253,7 @@ h1, h2, h3, .heading-font, .nav-links a {
   color: var(--color-brown);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 24px;
+  font-size: 16px; /* Dimensione compatta ed elegante da Figma */
   transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
 }
 
@@ -268,30 +261,34 @@ h1, h2, h3, .heading-font, .nav-links a {
 .nav-links a.active {
   color: var(--color-text);
   text-decoration: underline;
-  text-underline-offset: 6px;
+  text-underline-offset: 4px;
 }
 
 /* ==========================================
    6. DESKTOP STYLES (da 1024px in su)
    ========================================== */
 @media (min-width: 1024px) {
+  .nav-container {
+    padding: 0 var(--margin);
+    flex-wrap: nowrap;
+    height: var(--nav-height);
+  }
+
   .hamburger-btn {
     display: none;
   }
 
   .nav-links {
-    position: static;
     width: auto;
-    height: auto;
-    background-color: transparent;
+    max-height: none;
     opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    transform: none;
+    overflow: visible;
+    margin-top: 0;
   }
 
   .nav-links ul {
     flex-direction: row;
+    align-items: center;
     gap: 40px;
   }
 
@@ -321,4 +318,161 @@ h1, h2, h3, .heading-font, .nav-links a {
   color: var(--color-brown);        /* Arkeo Brown #CEB8A7 */
   font-size: var(--font-display);   /* Scala in automatico: 26px -> 42px -> 68px */
   line-height: var(--line-height-display);
+}
+
+/* ==========================================
+   7. CONCEPT SECTION (MOBILE FIRST)
+   ========================================== */
+.concept-section {
+  width: 100%;
+  padding: 80px var(--margin) 0 var(--margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px; /* RIDOTTO: Testo più vicino al box immagini su Mobile/Tablet */
+}
+
+/* CAROSELLO AUTOMATICO MOBILE / TABLET */
+.concept-gallery {
+  width: 100%;
+  max-width: 342px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+}
+
+.gallery-track {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 400%;
+  gap: 0;
+  animation: autoSlideVertical 8s infinite;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 25%;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* KEYFRAMES CAROSELLO VERTICALE */
+@keyframes autoSlideVertical {
+  /* 1. Stasi sull'Immagine 1 (dal 0% al 25% del tempo) */
+  0%, 25% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  /* 2. Scivola e si ferma sull'Immagine 2 (dal 33% al 58% del tempo) */
+  33%, 58% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  /* 3. Scivola e si ferma sull'Immagine 3 (dal 66% al 91% del tempo) */
+  66%, 91% {
+    transform: translateY(-50%);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  /* 4. Arrivati al 100%, scivola sull'Immagine 4 (uguale alla 1) e scatta SUBITO a 0% */
+  100% {
+    transform: translateY(-75%);
+  }
+}
+
+/* BLOCCO TESTO MOBILE */
+.concept-text {
+  width: 100%;
+  max-width: 500px;
+}
+
+.concept-text h2 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  color: var(--color-brown);
+  margin-bottom: 12px;
+}
+
+.concept-text p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* ==========================================
+   TABLET STYLES (da 768px a 1023px)
+   ========================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .concept-section {
+    gap: 0px;
+  }
+
+  .concept-gallery {
+    max-width: 460px;
+  }
+}
+
+.concept-text {
+    max-width: 90%;
+  }
+
+/* ==========================================
+   DESKTOP STYLES (da 1024px in su)
+   ========================================== */
+@media (min-width: 1024px) {
+  .concept-section {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 80px var(--margin) var(--margin) var(--margin);
+    gap: clamp(80px, 20vw, 160px); /* RESPONSIVE: Spazio centrale dinamico tra immagini e testo */
+  }
+
+  /* GALLERIA DESKTOP */
+  .concept-gallery {
+    width: 45%;
+    max-width: 500px;
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+
+  .gallery-track {
+    height: auto;
+    animation: none !important;
+    transform: none !important;
+    gap: 250px; /* Separazione verticale tra le immagini */
+    padding-bottom: 3vw;
+  }
+
+  .gallery-img {
+    height: auto;
+    max-height: 55vh;
+  }
+
+  .loop-img {
+    display: none;
+  }
+
+  /* TESTO STICKY DESKTOP */
+  .concept-text {
+    width: 45%;
+    position: sticky;
+    top: 45vh; /* CENTRATO: Il testo si ferma più in basso nell'area visiva */
+    align-self: flex-start;
+  }
+
+  .concept-text h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .concept-text p {
+    font-size: 17px;
+    line-height: 1.65;
+  }
 }
