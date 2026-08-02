@@ -456,7 +456,7 @@ h1, h2, h3, .heading-font, .nav-links a {
     height: auto;
     animation: none !important;
     transform: none !important;
-    gap: 250px; /* Separazione verticale tra le immagini */
+    gap: 300px; /* Separazione verticale tra le immagini */
   }
 
   .gallery-img {
