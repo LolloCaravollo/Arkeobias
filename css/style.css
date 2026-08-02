@@ -76,13 +76,18 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip; 
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 18px;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 h1, h2, h3, .heading-font, .nav-links a {
@@ -97,8 +102,8 @@ h1, h2, h3, .heading-font, .nav-links a {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: var(--color-bg);
   display: flex;
   justify-content: center;
@@ -349,7 +354,11 @@ h1, h2, h3, .heading-font, .nav-links a {
   width: 100%;
   height: 400%;
   gap: 0;
-  animation: autoSlideVertical 8s infinite;
+}
+
+/* L'animazione parte SOLO quando il JS aggiunge la classe .is-animated */
+.gallery-track.is-animated {
+  animation: autoSlideVertical 9s infinite;
 }
 
 .gallery-img {
@@ -385,24 +394,26 @@ h1, h2, h3, .heading-font, .nav-links a {
   }
 }
 
-/* BLOCCO TESTO MOBILE */
-.concept-text {
-  width: 100%;
-  max-width: 500px;
-}
-
+/* BLOCCO TESTO CONCEPT */
 .concept-text h2 {
   font-family: var(--font-heading);
-  font-size: 32px;
+  /* Scala fluidamente da 26px su mobile fino a 36px su desktop */
+  font-size: clamp(26px, 3.5vw, 36px); 
   color: var(--color-brown);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .concept-text p {
   font-family: var(--font-body);
-  font-size: 18px;
+  /* Scala fluidamente da 15px su mobile fino a 18px su desktop */
+  font-size: clamp(15px, 1.3vw, 18px); 
   line-height: 1.6;
   color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.concept-text p:last-child {
+  margin-bottom: 0;
 }
 
 /* ==========================================
@@ -446,7 +457,6 @@ h1, h2, h3, .heading-font, .nav-links a {
     animation: none !important;
     transform: none !important;
     gap: 250px; /* Separazione verticale tra le immagini */
-    padding-bottom: 3vw;
   }
 
   .gallery-img {
@@ -462,7 +472,7 @@ h1, h2, h3, .heading-font, .nav-links a {
   .concept-text {
     width: 45%;
     position: sticky;
-    top: 45vh; /* CENTRATO: Il testo si ferma più in basso nell'area visiva */
+    top: 30vh; /* CENTRATO: Il testo si ferma più in basso nell'area visiva */
     align-self: flex-start;
   }
 
@@ -475,4 +485,193 @@ h1, h2, h3, .heading-font, .nav-links a {
     font-size: 17px;
     line-height: 1.65;
   }
+}
+
+/* ==========================================
+   8. CONTACTS SECTION (MOBILE FIRST)
+   ========================================== */
+.contacts-section {
+  width: 100%;
+  margin-top: 155px; /* Spazio Auto-Layout da Figma */
+  background-color: var(--color-brown, #CEB8A7);
+  padding: 60px var(--margin) 40px var(--margin);
+  
+  /* Taglio diagonale dei vertici superiori */
+  clip-path: polygon(
+    40px 0%, 
+    calc(100% - 40px) 0%, 
+    100% 40px, 
+    100% 100%, 
+    0% 100%, 
+    0% 40px
+  );
+  
+  scroll-margin-top: var(--nav-height, 80px);
+}
+
+.contacts-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* Sviluppo verticale su Mobile */
+  gap: 36px;
+}
+
+/* LOGO CONTACTS & LINK (Clickable per scroll fluido in cima) */
+.contacts-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.contacts-logo-img {
+  width: auto;
+  height: var(--logo-height); /* Scala in coordinato con la Navbar (35px -> 45px) */
+  aspect-ratio: 4 / 1;
+  background-color: var(--color-text, #1B0D02);
+  -webkit-mask: url('../img/logo-arkeobias.svg') no-repeat left center / contain;
+  mask: url('../img/logo-arkeobias.svg') no-repeat left center / contain;
+}
+
+/* STRUTTURA BLOCCHI TESTO CENTRALI */
+.contacts-middle {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Spazio verticale tra Newsletter e Contact us */
+}
+
+/* TITOLI DI SEZIONE (Unificati alla Navbar: 16px -> 18px) */
+.contacts-block h4 {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.2vw, 18px); 
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+/* TESTI, LINK E INPUT EMAIL (Gerarchia body text: 14px -> 16px) */
+.contacts-block p, 
+.contacts-block a,
+.newsletter-input {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1vw, 16px); 
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.newsletter-link {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* INPUT NEWSLETTER FLUIDO (A COMPARSA) */
+.newsletter-input-wrap {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s ease-in-out;
+  margin-top: 0;
+}
+
+/* Stato aperto tramite JS */
+.newsletter-input-wrap.is-open {
+  max-height: 60px;
+  opacity: 1;
+  margin-top: 14px;
+}
+
+.newsletter-input {
+  width: 100%;
+  max-width: 320px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-text, #1B0D02);
+  padding: 6px 0;
+  color: #F8F4F1; /* Arkeo White */
+  outline: none;
+}
+
+.newsletter-input::placeholder {
+  color: #F8F4F1;
+  opacity: 0.8;
+}
+
+/* LISTA CONTATTI & ICONE SOCIAL RESPONSIVE */
+.contacts-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contacts-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-icon {
+  width: clamp(15px, 1.2vw, 18px);
+  height: clamp(15px, 1.2vw, 18px);
+  object-fit: contain;
+}
+
+/* Trasforma l'icona Instagram bianca nel colore Arkeo Black */
+.icon-ig {
+  filter: brightness(0);
+}
+
+/* ==========================================
+   TABLET & DESKTOP STYLES (da 768px in su)
+   ========================================== */
+@media (min-width: 768px) {
+  .contacts-section {
+    padding: 80px var(--margin) 50px var(--margin);
+    clip-path: polygon(
+      55px 0%, 
+      calc(100% - 55px) 0%, 
+      100% 55px, 
+      100% 100%, 
+      0% 100%, 
+      0% 55px
+    );
+  }
+
+  /* LAYOUT ORIZZONTALE BILANCIATO A 3 COLONNE */
+  .contacts-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end; /* Ancoraggio in basso per Logo e Credits */
+  }
+
+  /* 1. COLONNA SINISTRA (Logo) */
+  .contacts-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  /* 2. COLONNA CENTRALE (Newsletter + Contact us) */
+  .contacts-middle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto; /* Centra perfettamente la colonna nello schermo */
+  }
+
+  /* 3. COLONNA DESTRA (Credits) */
+  .contacts-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.copyright-text {
+  font-size: clamp(12px, 0.8vw, 14px) !important;
+  color: var(--color-bg, #F8F4F1) !important; /* Arkeo White */
+  margin-top: 4px;
 }
