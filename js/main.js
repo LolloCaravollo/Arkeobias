@@ -18,7 +18,7 @@ function navigateWithFade(targetUrl) {
   document.body.classList.remove('is-loaded');
   setTimeout(() => {
     window.location.href = targetUrl;
-  }, 350); // Corrisponde ai 0.35s della transizione CSS
+  }, 250); // Corrisponde ai 0.35s della transizione CSS
 }
 
 // ==========================================

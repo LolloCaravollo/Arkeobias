@@ -686,3 +686,214 @@ body.is-loaded {
   color: var(--color-bg, #F8F4F1) !important; /* Arkeo White */
   margin-top: 4px;
 }
+
+/* ==========================================
+   9. VOLUMES SECTION (SHOP LAYOUT)
+   ========================================== */
+.volumes-section {
+  width: 100%;
+  margin-top: var(--nav-height, 80px);
+  padding: 60px var(--margin);
+}
+
+.volumes-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CARD SINGOLO VOLUME (Mobile Layout: Verticale e Centrato) */
+.volume-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 24px; /* Padding laterale per far sporgere la linea divisoria */
+  border-bottom: 1px solid var(--color-brown, #CEB8A7);
+  text-align: center;
+}
+
+.volume-card:last-child {
+  border-bottom: none;
+}
+
+/* CONTENITORE IMMAGINE CON BORDO SOTTILE SMUSSATO A 45° */
+.volume-img-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1; /* Quadrato su Mobile e Tablet */
+  background-color: var(--color-brown, #CEB8A7); /* Colore del bordo */
+  padding: 1px; /* Spessore del bordo sottile */
+  
+  /* Taglio angoli a 45 gradi sul bordo esterno */
+  clip-path: polygon(
+    14px 0%, calc(100% - 14px) 0%, 
+    100% 14px, 100% calc(100% - 14px), 
+    calc(100% - 14px) 100%, 14px 100%, 
+    0% calc(100% - 14px), 0% 14px
+  );
+  transition: aspect-ratio 0.4s ease-in-out;
+}
+
+.volume-img-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg, #F8F4F1);
+  position: relative;
+  overflow: hidden;
+
+  /* Taglio angoli a 45 gradi per il contenuto interno */
+  clip-path: polygon(
+    13px 0%, calc(100% - 13px) 0%, 
+    100% 13px, 100% calc(100% - 13px), 
+    calc(100% - 13px) 100%, 13px 100%, 
+    0% calc(100% - 13px), 0% 13px
+  );
+}
+
+.volume-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* OVERLAY OSCURATO E LUCCHETTO PER VOLUMI 2 E 3 */
+.volume-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(27, 13, 2, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lock-icon {
+  width: clamp(32px, 3.5vw, 44px);
+  height: clamp(32px, 3.5vw, 44px);
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Rende l'icona Arkeo White */
+}
+
+/* TESTI E PREZZO */
+.volume-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.volume-title {
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+.volume-price {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.2vw, 18px);
+  color: var(--color-text);
+}
+
+/* BOTTONI CON VERTICI SMUSSATI A 45° (Dimensioni più compatte ed eleganti) */
+.btn-order {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 22px; /* Ridotto per una linea più snella */
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  
+  /* Taglio 45 gradi proporzionato al pulsante compatto */
+  clip-path: polygon(
+    6px 0%, calc(100% - 6px) 0%, 
+    100% 6px, 100% calc(100% - 6px), 
+    calc(100% - 6px) 100%, 6px 100%, 
+    0% calc(100% - 6px), 0% 6px
+  );
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* VOLUME 1: Bottone Attivo */
+.btn-order.is-available {
+  background-color: var(--color-brown, #CEB8A7);
+  color: var(--color-text, #1B0D02);
+  cursor: pointer;
+}
+
+.btn-order.is-available:hover {
+  background-color: var(--color-text, #1B0D02);
+  color: var(--color-bg, #F8F4F1);
+}
+
+/* VOLUMI 2 E 3: Bottone Disabilitato */
+.btn-order.is-disabled {
+  background-color: #808080;
+  color: #F8F4F1;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ==========================================
+   TABLET STYLES (da 768px a 1023px)
+   ========================================== */
+@media (min-width: 768px) {
+  .volume-card {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    gap: 40px;
+    padding: 56px 48px; /* Padding laterale esteso per far sporgere la linea */
+  }
+
+  .volume-img-wrap {
+    width: 40%;
+    max-width: 320px;
+    aspect-ratio: 1 / 1; /* Mantiene 1:1 su Tablet */
+    flex-shrink: 0;
+  }
+
+  /* Spinge l'intera sezione testi a destra, mantenendo l'allineamento testo a sx */
+  .volume-info {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: auto;
+  }
+}
+
+/* ==========================================
+   DESKTOP STYLES (da 1024px in su)
+   ========================================== */
+@media (min-width: 1024px) {
+  .volume-card {
+    gap: 60px;
+    padding: 64px 64px; /* Sporgenza della linea ancora più accentuata */
+  }
+
+  /* Immagine 16:9 su Desktop */
+  .volume-img-wrap {
+    width: 48%;
+    max-width: 520px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .volume-info {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: auto; /* Ancoraggio a destra */
+  }
+}

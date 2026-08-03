@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arkeobias — Volumes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- SCHERMATA DI LOADING -->
+  <div id="loader">
+    <div class="loader-logo-img"></div>
+  </div>
+
+  <!-- NAVBAR FISSA -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" id="nav-logo" class="logo-link" title="Torna alla schermata iniziale">
+        <div class="nav-logo-img"></div>
+      </a>
+      
+      <button id="hamburger-btn" class="hamburger-btn" aria-label="Apri menu">
+        <span class="hamburger-icon"></span>
+      </button>
+
+      <nav id="nav-links" class="nav-links">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="archive.html">Archive</a></li>
+          <li><a href="volumes.html" class="active">Volumes</a></li>
+          <li><a href="#contacts">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- VOLUMES SECTION -->
+    <section class="volumes-section">
+      <div class="volumes-container">
+
+        <!-- VOLUME 01 (DISPONIBILE) -->
+        <article class="volume-card">
+          <div class="volume-img-wrap">
+            <div class="volume-img-inner">
+              <img src="img/mockup-volume1.webp" alt="Volume 01 — Anatomia del fraintendimento" class="volume-img">
+            </div>
+          </div>
+
+          <div class="volume-info">
+            <h2 class="volume-title">Vol. 1: Europe</h2>
+            <p class="volume-price">€ 14,99</p>
+            <a href="#" class="btn-order is-available" onclick="event.preventDefault();">Order now</a>
+          </div>
+        </article>
+
+        <!-- VOLUME 02 (IN ARRIVO / BLOCCATO) -->
+        <article class="volume-card is-locked">
+          <div class="volume-img-wrap">
+            <div class="volume-img-inner">
+              <img src="img/mockup-volume2.webp" alt="Volume 02" class="volume-img">
+              <!-- Overlay scuro con Lucchetto -->
+              <div class="volume-overlay">
+                <img src="img/logo-lock.svg" alt="Locked" class="lock-icon">
+              </div>
+            </div>
+          </div>
+
+          <div class="volume-info">
+            <h2 class="volume-title">Vol. 2: North America</h2>
+            <p class="volume-price">€ --,--</p>
+            <button class="btn-order is-disabled" disabled>Preorder soon</button>
+          </div>
+        </article>
+
+        <!-- VOLUME 03 (IN ARRIVO / BLOCCATO) -->
+        <article class="volume-card is-locked">
+          <div class="volume-img-wrap">
+            <div class="volume-img-inner">
+              <img src="img/mockup-volume3.webp" alt="Volume 03" class="volume-img">
+              <!-- Overlay scuro con Lucchetto -->
+              <div class="volume-overlay">
+                <img src="img/logo-lock.svg" alt="Locked" class="lock-icon">
+              </div>
+            </div>
+          </div>
+
+          <div class="volume-info">
+            <h2 class="volume-title">Vol. 3: Asia</h2>
+            <p class="volume-price">€ --,--</p>
+            <button class="btn-order is-disabled" disabled>Preorder soon</button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- CONTACTS SECTION -->
+  <footer id="contacts" class="contacts-section">
+    <div class="contacts-container">
+      
+      <div class="contacts-col contacts-left">
+        <a href="#" id="footer-logo" class="contacts-logo-link" title="Torna in cima">
+          <div class="contacts-logo-img"></div>
+        </a>
+      </div>
+
+      <div class="contacts-middle">
+        <div class="contacts-block">
+          <h4>Newsletter</h4>
+          <p>Unisciti ad Arkeobias. <a href="#" id="newsletter-toggle" class="newsletter-link">Lascia la tua email qui.</a></p>
+          
+          <div id="newsletter-input-wrap" class="newsletter-input-wrap">
+            <input type="email" placeholder="tua@email.com" class="newsletter-input" required>
+          </div>
+        </div>
+
+        <div class="contacts-block">
+          <h4>Contact us</h4>
+          <ul class="contacts-list">
+            <li>
+              <img src="img/logo-ig.svg" alt="Instagram" class="contact-icon icon-ig">
+              <a href="https://instagram.com/arkeobias" target="_blank">@arkeobias</a>
+            </li>
+            <li>
+              <img src="img/logo-gmail.svg" alt="Email" class="contact-icon">
+              <a href="mailto:info@arkeobias.com">info@arkeobias.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="contacts-col contacts-right">
+        <div class="contacts-block">
+          <h4>Credits</h4>
+          <p>Caravaggi Lorenzo</p>
+          <p class="copyright-text">© 2026 Arkeobias. All rights reserved.</p>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+</body>
+</html>
