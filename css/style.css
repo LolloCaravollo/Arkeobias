@@ -95,6 +95,17 @@ h1, h2, h3, .heading-font, .nav-links a {
   font-weight: 700;
 }
 
+/* DISSOLVENZA MORBIDA TRA LE PAGINE */
+body {
+  opacity: 0;
+  transition: opacity 0.35s ease-in-out; /* Durata della dissolvenza */
+}
+
+/* Quando la pagina è caricata, la rende visibile */
+body.is-loaded {
+  opacity: 1;
+}
+
 /* ==========================================
    4. SCHERMATA DI LOADING (OVERLAY)
    ========================================== */

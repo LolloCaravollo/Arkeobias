@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arkeobias — Archive</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- SCHERMATA DI LOADING -->
+  <div id="loader">
+    <div class="loader-logo-img"></div>
+  </div>
+
+  <!-- NAVBAR FISSA -->
+  <header class="navbar">
+    <div class="nav-container">
+      <!-- Logo Vettoriale (Cliccando qui riapre il loader e torna a Home) -->
+      <a href="index.html" id="nav-logo" class="logo-link" title="Torna alla schermata iniziale">
+        <div class="nav-logo-img"></div>
+      </a>
+      
+      <!-- Pulsante Hamburger (Mobile & Tablet) -->
+      <button id="hamburger-btn" class="hamburger-btn" aria-label="Apri menu">
+        <span class="hamburger-icon"></span>
+      </button>
+
+      <!-- Nav Links -->
+      <nav id="nav-links" class="nav-links">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="archive.html" class="active">Archive</a></li>
+          <li><a href="volumes.html">Volumes</a></li>
+          <li><a href="#contacts">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- CONCEPT / ARCHIVE SECTION (Senza Hero Section) -->
+    <section class="concept-section" style="margin-top: var(--nav-height);">
+      
+      <!-- Galleria Immagini (Stessa struttura dell'index) -->
+      <div class="concept-gallery">
+        <div class="gallery-track">
+          <!-- Sostituisci con le immagini specifiche dell'Archivio -->
+          <img src="img/Megalosaurus-fossil.webp" alt="Reperto Archivio 1" class="gallery-img">
+          <img src="img/Megalosaurus-first.webp" alt="Reperto Archivio 2" class="gallery-img">
+          <img src="img/Megalosaurus-now.webp" alt="Reperto Archivio 3" class="gallery-img">
+          <img src="img/Megalosaurus-fossil.webp" alt="Reperto Archivio 1" class="gallery-img loop-img">
+        </div>
+      </div>
+
+      <!-- Testo Storia Scoperta della Specie -->
+      <div class="concept-text">
+        <h2>Megalosaurus bucklandii</h2>
+        <p>Nel 1912, durante una serie di scavi nella Valle dei Fossili, vennero portati alla luce i primi resti frammentari di una struttura ossea sconosciuta.</p>
+        <p>Le prime ipotesi degli anatomisti dell'epoca descrivevano la creatura come un rettile gigante bipede, caratterizzato da crestazioni craniche prominenti e placche protettive lungo la spina dorsale.</p>
+        <p>Solamente decenni più tardi, l'analisi delle micro-scanalature ossee e dei sedimenti circostanti ha rivelato una realtà completamente diversa: gli apparati considerati armi d'attacco erano in realtà supporti vascolari per la termoregolazione di un organismo mite e vegetariano.</p>
+        <p>La storia di questa specie rimane uno dei casi studio fondamentali nell'analisi del bias interpretativo e della ricostruzione paleo-artistica.</p>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- CONTACTS SECTION (Stessa identica struttura dell'index) -->
+  <footer id="contacts" class="contacts-section">
+    <div class="contacts-container">
+      
+      <!-- COLONNA SINISTRA: Logo -->
+      <div class="contacts-col contacts-left">
+        <a href="#" id="footer-logo" class="contacts-logo-link" title="Torna in cima">
+          <div class="contacts-logo-img"></div>
+        </a>
+      </div>
+
+      <!-- COLONNA CENTRALE: Newsletter + Contact us -->
+      <div class="contacts-middle">
+        
+        <!-- Blocco Newsletter -->
+        <div class="contacts-block">
+          <h4>Newsletter</h4>
+          <p>Unisciti ad Arkeobias. <a href="#" id="newsletter-toggle" class="newsletter-link">Lascia la tua email qui.</a></p>
+          
+          <div id="newsletter-input-wrap" class="newsletter-input-wrap">
+            <input type="email" placeholder="tua@email.com" class="newsletter-input" required>
+          </div>
+        </div>
+
+        <!-- Blocco Contact us -->
+        <div class="contacts-block">
+          <h4>Contact us</h4>
+          <ul class="contacts-list">
+            <li>
+              <img src="img/logo-ig.svg" alt="Instagram" class="contact-icon icon-ig">
+              <a href="https://instagram.com/arkeobias" target="_blank">@arkeobias</a>
+            </li>
+            <li>
+              <img src="img/logo-gmail.svg" alt="Email" class="contact-icon">
+              <a href="mailto:info@arkeobias.com">info@arkeobias.com</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- COLONNA DESTRA: Credits + Copyright -->
+      <div class="contacts-col contacts-right">
+        <div class="contacts-block">
+          <h4>Credits</h4>
+          <p>Caravaggi Lorenzo</p>
+          <p class="copyright-text">© 2026 Arkeobias. All rights reserved.</p>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Script unico universale -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
