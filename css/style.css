@@ -498,6 +498,18 @@ body.is-loaded {
   }
 }
 
+/* DISTANZIAMENTO TRA PIÙ SEZIONI ARCHIVIO */
+.archive-section {
+  margin-top: 100px;
+}
+
+/* INVERSIONE LAYOUT SU DESKTOP (da 1024px in su) */
+@media (min-width: 1024px) {
+  .concept-section.is-reversed {
+    flex-direction: row-reverse;
+  }
+}
+
 /* ==========================================
    8. CONTACTS SECTION (MOBILE FIRST)
    ========================================== */
@@ -872,6 +884,12 @@ body.is-loaded {
     align-items: flex-start;
     text-align: left;
     margin-left: auto;
+    width: fit-content;
+  }
+
+  /* Spinge il pulsante sul limite destro del contenitore testo */
+  .btn-order {
+    align-self: flex-end;
   }
 }
 
@@ -895,5 +913,11 @@ body.is-loaded {
     align-items: flex-start;
     text-align: left;
     margin-left: auto; /* Ancoraggio a destra */
+    width: fit-content;
+  }
+
+  /* Spinge il pulsante sul limite destro del contenitore testo */
+  .btn-order {
+    align-self: flex-end;
   }
 }

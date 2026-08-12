@@ -150,27 +150,27 @@ if (navLinks) {
   });
 }
 
-
 // ==========================================
-// 6. ANIMAZIONE CONCEPT (INTERSECTION OBSERVER)
+// 6. ANIMAZIONE CONCEPT & ARCHIVE (INTERSECTION OBSERVER)
 // ==========================================
-const conceptSection = document.querySelector('.concept-section');
-const galleryTrack = document.querySelector('.gallery-track');
+const conceptSections = document.querySelectorAll('.concept-section');
 
-if (conceptSection && galleryTrack) {
+if (conceptSections.length > 0) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        galleryTrack.classList.add('is-animated');
+        const galleryTrack = entry.target.querySelector('.gallery-track');
+        if (galleryTrack) {
+          galleryTrack.classList.add('is-animated');
+        }
       }
     });
   }, { 
     threshold: 0.3 
   });
 
-  observer.observe(conceptSection);
+  conceptSections.forEach(section => observer.observe(section));
 }
-
 
 // ==========================================
 // 7. TOGGLE FLUIDO INPUT NEWSLETTER

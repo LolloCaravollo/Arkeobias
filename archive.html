@@ -16,17 +16,14 @@
   <!-- NAVBAR FISSA -->
   <header class="navbar">
     <div class="nav-container">
-      <!-- Logo Vettoriale (Cliccando qui riapre il loader e torna a Home) -->
       <a href="index.html" id="nav-logo" class="logo-link" title="Torna alla schermata iniziale">
         <div class="nav-logo-img"></div>
       </a>
       
-      <!-- Pulsante Hamburger (Mobile & Tablet) -->
       <button id="hamburger-btn" class="hamburger-btn" aria-label="Apri menu">
         <span class="hamburger-icon"></span>
       </button>
 
-      <!-- Nav Links -->
       <nav id="nav-links" class="nav-links">
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -39,47 +36,60 @@
   </header>
 
   <main>
-    <!-- CONCEPT / ARCHIVE SECTION (Senza Hero Section) -->
-    <section class="concept-section" style="margin-top: var(--nav-height);">
+    <!-- ARCHIVE SECTION 1: MEGALOSAURUS (Immagine a Sinistra, Testo a Destra) -->
+    <section class="concept-section archive-section">
       
-      <!-- Galleria Immagini (Stessa struttura dell'index) -->
       <div class="concept-gallery">
         <div class="gallery-track">
-          <!-- Sostituisci con le immagini specifiche dell'Archivio -->
-          <img src="img/Megalosaurus-fossil.webp" alt="Reperto Archivio 1" class="gallery-img">
-          <img src="img/Megalosaurus-first.webp" alt="Reperto Archivio 2" class="gallery-img">
-          <img src="img/Megalosaurus-now.webp" alt="Reperto Archivio 3" class="gallery-img">
-          <img src="img/Megalosaurus-fossil.webp" alt="Reperto Archivio 1" class="gallery-img loop-img">
+          <img src="img/Megalosaurus-fossil.webp" alt="Megalosaurus Skull" class="gallery-img">
+          <img src="img/Megalosaurus-first.webp" alt="Megalosaurus Reconstruction" class="gallery-img">
+          <img src="img/Megalosaurus-now.webp" alt="Megalosaurus Real" class="gallery-img">
+          <img src="img/Megalosaurus-fossil.webp" alt="Megalosaurus Skull" class="gallery-img loop-img">
         </div>
       </div>
 
-      <!-- Testo Storia Scoperta della Specie -->
       <div class="concept-text">
         <h2>Megalosaurus bucklandii</h2>
         <p>Nel 1912, durante una serie di scavi nella Valle dei Fossili, vennero portati alla luce i primi resti frammentari di una struttura ossea sconosciuta.</p>
         <p>Le prime ipotesi degli anatomisti dell'epoca descrivevano la creatura come un rettile gigante bipede, caratterizzato da crestazioni craniche prominenti e placche protettive lungo la spina dorsale.</p>
         <p>Solamente decenni più tardi, l'analisi delle micro-scanalature ossee e dei sedimenti circostanti ha rivelato una realtà completamente diversa: gli apparati considerati armi d'attacco erano in realtà supporti vascolari per la termoregolazione di un organismo mite e vegetariano.</p>
-        <p>La storia di questa specie rimane uno dei casi studio fondamentali nell'analisi del bias interpretativo e della ricostruzione paleo-artistica.</p>
+      </div>
+
+    </section>
+
+    <!-- ARCHIVE SECTION 2: PALAEOLOXODON FALCONERI (Invertito su Desktop: Testo a Sinistra, Immagine a Destra) -->
+    <section class="concept-section archive-section is-reversed">
+      
+      <div class="concept-gallery">
+        <div class="gallery-track">
+          <img src="img/Elephant-fossil.webp" alt="Palaeoloxodon Skull" class="gallery-img">
+          <img src="img/Elephant-Cyclope.webp" alt="Palaeoloxodon Reconstruction" class="gallery-img">
+          <img src="img/Elephant-real.webp" alt="Palaeoloxodon Real" class="gallery-img">
+          <img src="img/Elephant-fossil.webp" alt="Palaeoloxodon Skull" class="gallery-img loop-img">
+        </div>
+      </div>
+
+      <div class="concept-text">
+        <h2>Palaeoloxodon falconeri</h2>
+        <p>Quando i primi abitanti del Mediterraneo rinvennero nei cunicoli calcarei della Sicilia enormi crani con una profonda cavità centrale, immaginarono la dimora dei Ciclopi: giganti monocoli dalla forza prodigiosa.</p>
+        <p>In realtà, quel foro frontale non era un'orbita oculare, ma la cavità nasale dell'elefante nano siciliano (<em>Palaeoloxodon falconeri</em>), un pachiderma di appena novanta centimetri d'altezza evolutosi per nanismo insulare.</p>
+        <p>La fusione tra mito e fossile ha così trasformato un piccolo erbivoro pleistocenico nel più temuto dei mostri omerici, dimostrando ancora una volta come l'anatomia incompleta sia la fucina della mitologia.</p>
       </div>
 
     </section>
   </main>
 
-  <!-- CONTACTS SECTION (Stessa identica struttura dell'index) -->
+  <!-- CONTACTS SECTION -->
   <footer id="contacts" class="contacts-section">
     <div class="contacts-container">
       
-      <!-- COLONNA SINISTRA: Logo -->
       <div class="contacts-col contacts-left">
         <a href="#" id="footer-logo" class="contacts-logo-link" title="Torna in cima">
           <div class="contacts-logo-img"></div>
         </a>
       </div>
 
-      <!-- COLONNA CENTRALE: Newsletter + Contact us -->
       <div class="contacts-middle">
-        
-        <!-- Blocco Newsletter -->
         <div class="contacts-block">
           <h4>Newsletter</h4>
           <p>Unisciti ad Arkeobias. <a href="#" id="newsletter-toggle" class="newsletter-link">Lascia la tua email qui.</a></p>
@@ -89,7 +99,6 @@
           </div>
         </div>
 
-        <!-- Blocco Contact us -->
         <div class="contacts-block">
           <h4>Contact us</h4>
           <ul class="contacts-list">
@@ -103,10 +112,8 @@
             </li>
           </ul>
         </div>
-
       </div>
 
-      <!-- COLONNA DESTRA: Credits + Copyright -->
       <div class="contacts-col contacts-right">
         <div class="contacts-block">
           <h4>Credits</h4>
@@ -118,7 +125,6 @@
     </div>
   </footer>
 
-  <!-- Script unico universale -->
   <script src="js/main.js"></script>
 
 </body>
