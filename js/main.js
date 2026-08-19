@@ -197,3 +197,113 @@ if (footerLogo) {
     smoothScrollTo(0, 800);
   });
 }
+
+// ==========================================
+// 9. PULVISCOLO DI SCAVO DINAMICO (CONTRASTO ADATTIVO)
+// ==========================================
+(function initDustTrail() {
+  let canvas = document.getElementById('dust-canvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    canvas.id = 'dust-canvas';
+    document.body.appendChild(canvas);
+  }
+
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  
+  let mouse = { x: -100, y: -100 };
+  let brush = { x: -100, y: -100 };
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    if (brush.x === -100) {
+      brush.x = mouse.x;
+      brush.y = mouse.y;
+    }
+  });
+
+  // Classe per i singoli granelli
+  class Grain {
+    constructor(x, y, speedFactor, colorRgb) {
+      const angle = Math.random() * Math.PI * 2;
+      const spread = Math.random() * 6;
+      this.x = x + Math.cos(angle) * spread;
+      this.y = y + Math.sin(angle) * spread;
+      
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4 + 0.15;
+
+      this.size = Math.random() * 1.5 + 1;
+      this.alpha = Math.min(0.85, 0.4 + speedFactor * 0.5);
+      this.decay = Math.random() * 0.012 + 0.009;
+      
+      // Assegna il colore calcolato (Arkeo White su Contacts, Arkeo Brown altrove)
+      this.colorRgb = colorRgb; 
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.alpha -= this.decay;
+    }
+
+    draw() {
+      ctx.fillStyle = `rgba(${this.colorRgb}, ${Math.max(this.alpha, 0)})`;
+      ctx.fillRect(this.x, this.y, this.size, this.size);
+    }
+  }
+
+  function animateDust() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (mouse.x !== -100) {
+      const dx = mouse.x - brush.x;
+      const dy = mouse.y - brush.y;
+      brush.x += dx * 0.14;
+      brush.y += dy * 0.14;
+
+      const distance = Math.hypot(dx, dy);
+
+      if (distance > 0.5) {
+        // Controlla se il pennello si trova all'interno della sezione contatti
+        const contactsSection = document.querySelector('.contacts-section');
+        let particleColor = '206, 184, 167'; // Default: Arkeo Brown
+
+        if (contactsSection) {
+          const rect = contactsSection.getBoundingClientRect();
+          // Se il cursore è dentro l'area dei contatti
+          if (brush.y >= rect.top && brush.y <= rect.bottom && brush.x >= rect.left && brush.x <= rect.right) {
+            particleColor = '248, 244, 241'; // Arkeo White
+          }
+        }
+
+        const count = Math.min(Math.floor(distance * 0.35) + 2, 8);
+        for (let i = 0; i < count; i++) {
+          particles.push(new Grain(brush.x, brush.y, Math.min(distance / 20, 1), particleColor));
+        }
+      }
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      particles[i].update();
+      particles[i].draw();
+
+      if (particles[i].alpha <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+
+    requestAnimationFrame(animateDust);
+  }
+
+  animateDust();
+})();
